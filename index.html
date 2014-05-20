@@ -1,0 +1,320 @@
+<!DOCTYPE html> 
+<html>
+<head>
+<style type="text/css">
+    #outerCircleText {
+        font-style:oblique;
+        font-weight: bold;
+        font-family: 'verdana', arial;
+        color:#609;
+    position: absolute;top: 0;left: 0;z-index: 3000;cursor: default;}
+    #outerCircleText div {position: relative;}
+    #outerCircleText div div {position: absolute;top: 0;left: 0;text-align: center;}
+</style>
+
+
+<script type="text/javascript">
+
+;(function(){
+
+var msg = "Galeria Emos"; //aki cambien el texto, este sera el que siga al raton
+
+var size = 20;//tamaño de la letra
+var circleY = 0.75; var circleX = 3;
+var letter_spacing = 5;
+var diameter = 5;
+var rotation = 0.1;
+var speed = 0.1;
+
+if (!window.addEventListener && !window.attachEvent || !document.createElement) return;
+
+msg = msg.split('');
+var n = msg.length - 1, a = Math.round(size * diameter * 0.408333), currStep = 20,
+ymouse = a * circleY + 20, xmouse = a * circleX + 20, y = [], x = [], Y = [], X = [],
+o = document.createElement('div'), oi = document.createElement('div'),
+b = document.compatMode && document.compatMode != "BackCompat"? document.documentElement : document.body,
+
+mouse = function(e){
+ e = e || window.event;
+ ymouse = !isNaN(e.pageY)? e.pageY : e.clientY; // y-position
+ xmouse = !isNaN(e.pageX)? e.pageX : e.clientX; // x-position
+},
+
+makecircle = function(){
+ if(init.nopy){
+  o.style.top = (b || document.body).scrollTop + 'px';
+  o.style.left = (b || document.body).scrollLeft + 'px';
+ };
+ currStep -= rotation;
+ for (var d, i = n; i > -1; --i){
+  d = document.getElementById('iemsg' + i).style;
+  d.top = Math.round(y[i] + a * Math.sin((currStep + i) / letter_spacing) * circleY - 15) + 'px';
+  d.left = Math.round(x[i] + a * Math.cos((currStep + i) / letter_spacing) * circleX) + 'px';
+ };
+},
+
+drag = function(){
+ y[0] = Y[0] += (ymouse - Y[0]) * speed;
+ x[0] = X[0] += (xmouse - 20 - X[0]) * speed;
+ for (var i = n; i > 0; --i){
+  y[i] = Y[i] += (y[i-1] - Y[i]) * speed;
+  x[i] = X[i] += (x[i-1] - X[i]) * speed;
+ };
+ makecircle();
+},
+
+init = function(){
+ if(!isNaN(window.pageYOffset)){
+  ymouse += window.pageYOffset;
+  xmouse += window.pageXOffset;
+ } else init.nopy = true;
+ for (var d, i = n; i > -1; --i){
+  d = document.createElement('div'); d.id = 'iemsg' + i;
+  d.style.height = d.style.width = a + 'px';
+  d.appendChild(document.createTextNode(msg[i]));
+  oi.appendChild(d); y[i] = x[i] = Y[i] = X[i] = 0;
+ };
+ o.appendChild(oi); document.body.appendChild(o);
+ setInterval(drag, 25);
+},
+ascroll = function(){
+ ymouse += window.pageYOffset;
+ xmouse += window.pageXOffset;
+ window.removeEventListener('scroll', ascroll, false);
+};
+o.id = 'outerCircleText'; o.style.fontSize = size + 'px';
+if (window.addEventListener){
+ window.addEventListener('load', init, false);
+ document.addEventListener('mouseover', mouse, false);
+ document.addEventListener('mousemove', mouse, false);
+  if (/Apple/.test(navigator.vendor))
+   window.addEventListener('scroll', ascroll, false);
+}
+else if (window.attachEvent){
+ window.attachEvent('onload', init);
+ document.attachEvent('onmousemove', mouse);
+};
+})();
+</script>
+
+<meta charset="utf-8">
+<title>Ejemplo Practica 1 Movil</title>
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css">
+<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
+</head> 
+<body> 
+
+
+<div data-role="page" id="inicio" data-theme="b">
+	<div data-role="header">
+		<h1>Galeria De Emos</h1>
+	</div>
+
+
+
+	<div data-role="content">	
+		<ul data-role="listview">
+			<li><a href="#page2">Historia</a></li>
+            <li><a href="#page3">Frases</a></li>
+			<li><a href="#page4">Imagenes</a></li>
+		</ul>
+        
+        
+        
+    </div>    
+   	<div data-role="content" align="justify">
+    
+    
+    <a href="#mykar" data-rel="popup" data-position-to="window">
+    <img src="imagenes/images7.jpg" alt="skaret view" style="width:100px;"></a>
+    <div data-role="popup" id="mykar">
+    <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">close</a><img src="imagenes/55.jpg" style="width:800px;heigh:500px;" alt="Skaret view">
+        </div>
+    
+ No vale la pena llorar por algo que tarde o temprano vas a olvidar.<br>
+
+No puedes conquistar a quien no se rinde.
+ 
+    <br>
+    
+    <a href="#mypop" data-rel="popup" class="ui-btn ui-btn-inline ui-corner-all">E mail </a>
+    
+    <div data-role="popup" id="mypop">
+    <p>alan.drug97@hotmail.com</p>
+    </div>
+    
+    </div>
+    
+     <div data-role="content">
+    <div data-role="collapsible-set">
+    <div data-role="collapsible" data-collapsed="true">
+      <h1>Emos</h1>
+    <a href="#mymapa" data-rel="popup" data-position-to="window">
+    <img src="imagenes/afe.jpg" alt="Skatet View" style="width:100px;"></a>
+    
+    <div data-role="popup" id="mymapa">
+      
+      <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a><img src="imagenes/556.jpg" style="width:800px;height:500px;" alt="Skaret View">
+      </div>
+      
+             </div>
+              </div>
+                </div>
+	
+    <div data-role="footer" data-position="fixed"1 >
+		<div data-role="navbar" data-iconpos="top">
+        <ul>
+        <li><a href="#inicio" data-transition="pop" data-icon="home"> INICIO </a>
+        </li>
+        <li> <a href="#ayuda" data-transition="flip" data-icon="alert"> AYUDA </a>
+        </li>
+        <li> <a href="#contacto" data-transition="fade" data-icon="info"> CONTACTO </a>
+        </li>
+        </ul>
+       </div>
+	    </div>
+        
+        
+</div>
+
+
+<div data-role="page" id="page2" data-theme="b">
+	<div data-role="header">
+     <a data-role="button" data-rel="back" data-direction="reverse" data-icon="back"> Regresar</a>
+		<h1>Historia</h1>
+        
+	</div>
+	<div data-role="content">
+	<center>
+	  <p><img src="imagenes/images3.jpg" width="280" height="280" > </p>
+	  <p>A lo  largo de su historia, el <em>emo</em> ha pasado por varias etapas. A finales de  los '80 el término <em>emo</em> se utilizaba para calificar a las bandas de la  escena musical <em>underground</em> de <a href="http://es.wikipedia.org/wiki/Washington_D.C." title="Washington D.C.">Washington D.C.</a> como <a href="http://es.wikipedia.org/wiki/Rites_of_Spring" title="Rites of Spring">Rites of Spring</a> y <a href="http://es.wikipedia.org/wiki/Embrace_%28banda_estadounidense%29" title="Embrace (banda estadounidense)">Embrace</a>,  entre otras. A mediados de los años '90, el género adoptó los patrones sonoros  creados por <a href="http://es.wikipedia.org/wiki/Sunny_Day_Real_Estate" title="Sunny Day Real Estate">Sunny Day Real Estate</a>.  Hoy en día, el término es erróneamente utilizado para etiquetar bandas de  diversos estilos como el <a href="http://es.wikipedia.org/wiki/Pop_punk" title="Pop punk">pop punk</a>, el <a href="http://es.wikipedia.org/wiki/Post-hardcore" title="Post-hardcore">post-hardcore</a> e incluso el <a href="http://es.wikipedia.org/wiki/Metalcore" title="Metalcore">metalcore</a>. Aunque usualmente, el emo se está  asociando a una nueva resurgimiento de bandas <a href="http://es.wikipedia.org/wiki/Indie_Rock" title="Indie Rock">Indie Rock</a> nacidas a fines de la década del 2000,  que siguen el sonido clásico del emo de los 90 entre el noreste y el centro de <a href="http://es.wikipedia.org/wiki/Estados_Unidos" title="Estados Unidos">Estados Unidos</a>.<a href="http://es.wikipedia.org/wiki/Emo#cite_note-emorevival-4">4</a><br>
+	    Las  bandas más populares usualmente catalogadas dentro de este estilo musical son <a href="http://es.wikipedia.org/wiki/Dashboard_Confessional" title="Dashboard Confessional">Dashboard Confessional</a>, <a href="http://es.wikipedia.org/wiki/Saves_The_Day" title="Saves The Day">Saves The Day</a>, <a href="http://es.wikipedia.org/wiki/Thursday" title="Thursday">Thursday</a>, <a href="http://es.wikipedia.org/wiki/Jimmy_Eat_World" title="Jimmy Eat World">Jimmy Eat World</a>, <a href="http://es.wikipedia.org/wiki/Funeral_For_A_Friend" title="Funeral For A Friend">Funeral For A Friend</a>, <a href="http://es.wikipedia.org/wiki/Secondhand_Serenade" title="Secondhand Serenade">Secondhand Serenade</a>, <a href="http://es.wikipedia.org/wiki/Senses_Fail" title="Senses Fail">Senses Fail</a>, entre otros. Para la nueva vertiente  del emo se suman <a href="http://es.wikipedia.org/wiki/Empire%21_Empire%21_%28I_Was_a_Lonely_Estate%29" title="Empire! Empire! (I Was a Lonely Estate)">Empire!  Empire! (I  Was a Lonely Estate)</a>, <a href="http://es.wikipedia.org/wiki/Joie_de_Vivre" title="Joie de Vivre">Joie de Vivre</a>, <a href="http://es.wikipedia.org/wiki/Football,_Etc." title="Football, Etc.">Football, Etc.</a>, <a href="http://es.wikipedia.org/wiki/Annabel" title="Annabel">Annabel</a>, <a href="http://es.wikipedia.org/wiki/Snowing" title="Snowing">Snowing</a> e <a href="http://es.wikipedia.org/w/index.php?title=Into_It._Over_It.&action=edit&redlink=1" title="Into It. Over It. (aún no redactado)">Into It. Over It.</a>,  entre otros.<a href="http://es.wikipedia.org/wiki/Emo#cite_note-5">5</a> <a href="http://es.wikipedia.org/wiki/Emo#cite_note-emorevival-4">4</a><br>
+      Como  consecuencia del cambio sustancial y la poca relación entre el sonido de las  bandas de la escena <em>emo-core</em> de los '80 e inicios de los '90 con el de  las bandas actualmente etiquetadas dentro del género, se han generado dos  vertientes en el uso del término <strong>&quot;emo&quot;</strong>. Mientras unos afirman  que el género desapareció a fines de los '90 (Junto con el álbum <a href="http://es.wikipedia.org/wiki/Clarity_%28%C3%A1lbum_de_Jimmy_Eat_World%29" title="Clarity (álbum de Jimmy Eat World)">Clarity</a> de <a href="http://es.wikipedia.org/wiki/Jimmy_Eat_World" title="Jimmy Eat World">Jimmy Eat World</a>),  otros aceptan su uso para catalogar el estilo de diversas bandas de la escena  popular.</p>
+</center>
+        	
+	</div>
+	<div data-role="footer" data-position="fixed">
+		<div data-role="navbar" data-iconpos="top">
+        <ul>
+        <li><a href="#inicio" data-transition="pop" data-icon="home"> INICIO </a>
+        </li>
+        <li> <a href="#ayuda" data-transition="flip" data-icon="alert"> AYUDA </a>
+        </li>
+        <li> <a href="#contacto" data-transition="fade" data-icon="info"> CONTACTO </a>
+        </li>
+        </ul>
+        </div>
+	</div>
+</div>
+
+<div data-role="page" id="page3" data-theme="b">
+	<div data-role="header">
+     <a data-role="button" data-rel="back" data-direction="reverse" data-icon="back"> Regresar</a>
+		<h1>Frases</h1>
+	</div>
+	<div data-role="content">
+    <h1>&nbsp;</h1>	
+		<center><img src="imagenes/8.jpg" width="280" height="280"> </center>
+		No  quiero morir, quiero dejar de sufrir, no quiero dejar de respirar, quiero dejar  de llorar.
+		<h1>&nbsp;</h1>
+        <center><img src="imagenes/9.jpg" width="280" height="280"></center>
+        Te  doy mi corazón. Haz con el lo que creas prudente: puedes pisarlo, tirarlo,  hazlo pedazos pero antes quiero que sepas que tu estas dentro ...y si lo matas,  También mueres.        .
+<h1>&nbsp;</h1>
+        <center><img src="imagenes/gghg.jpg"width="280" height="280"></center>
+        Tu  sonrisa es la luz que ilumina mi alma, tu llanto la tormenta que destruye mi  corazón.
+        <h1>&nbsp;</h1>
+        <center><img src="imagenes/images.jpg" width="280" height="280"></center>
+        Soy  ese oscuro cupido que vela haciendo felices a otros corazones mientras que el  mio se siente solo.        .
+<h1>&nbsp;</h1>
+        <center><img src="imagenes/images-1.jpg" width="280" height="280"></center>
+        Me  gusta estar bajo la lluvia porque así nadie sabe que estoy llorando.        .
+<h1>&nbsp;</h1>
+        <center><img src="imagenes/images2.jpg" width="280" height="280"></center>
+        Se  ríen de mi porque soy diferente, pero yo me carcajeo de ustedes porque son  todos iguales.<br>
+    </div>
+	<div data-role="footer"  data-position="fixed">
+		<div data-role="navbar" data-iconpos="top">
+        <ul>
+        <li><a href="#inicio" data-transition="pop" data-icon="home"> INICIO </a>
+        </li>
+        <li> <a href="#ayuda" data-transition="flip" data-icon="alert"> AYUDA </a>
+        </li>
+        <li> <a href="#contacto" data-transition="fade" data-icon="info"> CONTACTO </a>
+        </li>
+        </ul>
+        </div>
+	</div>
+</div>
+    
+<div data-role="page" id="page4" data-theme="b">
+	<div data-role="header">
+     <a data-role="button" data-rel="back" data-direction="reverse" data-icon="back"> Regresar</a>
+		<h1>LOGO</h1>
+	</div>
+	<div data-role="content">	
+		<center><img src="imagenes/índice2.jpg" width="280" height="280"></center>
+		<p>&nbsp;</p>
+	</div>
+	<div data-role="footer"  data-position="fixed">
+		<div data-role="navbar" data-iconpos="top">
+        <ul>
+        <li><a href="#inicio" data-transition="pop" data-icon="home"> INICIO </a>
+        </li>
+        <li> <a href="#ayuda" data-transition="flip" data-icon="alert"> AYUDA </a>
+        </li>
+        <li> <a href="#contacto" data-transition="fade" data-icon="info"> CONTACTO </a>
+        </li>
+        </ul>
+        </div>
+	</div>
+</div>
+
+<div data-role="page" id="contacto" data-theme="b"> 
+	<div data-role="header">
+     <a data-role="button" data-rel="back" data-direction="reverse" data-icon="back"> Regresar</a>
+		<h1>&nbsp;</h1>
+	</div>
+	<div data-role="content">	
+		<center><img src="imagenes/índice.jpg" width="280" height="280"></center>
+		Busco  a cualquier mendigo de colores por que el príncipe azul no existe.<br>
+        <br>
+) </div>
+	<div data-role="footer" data-position="fixed"1>
+		<div data-role="navbar" data-iconpos="top">
+        <ul>
+        <li><a href="#inicio" data-transition="pop" data-icon="home"> INICIO </a>
+        </li>
+        <li> <a href="#ayuda" data-transition="flip" data-icon="alert"> AYUDA </a>
+        </li>
+        <li> <a href="#contacto" data-transition="fade" data-icon="info"> CONTACTO </a>
+        </li>
+        </ul>
+        </div>
+	</div>
+</div>
+
+<div data-role="page" id="ayuda" data-theme="b">
+	<div data-role="header">
+     <a data-role="button" data-rel="back" data-direction="reverse" data-icon="back"> Regresar</a>
+		<h1>&nbsp;</h1>
+	</div>
+	<div data-role="content">	
+		<center><img src="imagenes/images4.jpg" width="280" height="280"></center>
+	</div>
+	<div data-role="footer" data-position="fixed"1>
+		<div data-role="navbar" data-iconpos="top">
+        <ul>
+        <li><a href="#inicio" data-transition="pop" data-icon="home"> INICIO </a>
+        </li>
+        <li> <a href="#ayuda" data-transition="flip" data-icon="alert"> AYUDA </a>
+        </li>
+        <li> <a href="#contacto" data-transition="fade" data-icon="info"> CONTACTO </a>
+        </li>
+        </ul>
+        </div>
+	</div>
+</div>
+
+</body>
+</html>
